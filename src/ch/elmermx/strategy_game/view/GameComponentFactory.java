@@ -8,7 +8,7 @@ public class GameComponentFactory {
 	public static GameComponent createGameComponent(GameObject go) {
 		if (go instanceof WorkerUnit)
 			return new WorkerComponent(go);
-		throw new ClassNotFoundException();
+		throw new RuntimeException();
 	}
 
 }

@@ -5,22 +5,25 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JFrame;
-import javax.swing.OverlayLayout;
 import javax.swing.SwingUtilities;
 
 import ch.elmermx.model.Game;
 import ch.elmermx.model.GameObject;
 
-public class GameFrame extends JFrame {
+public class GameFrame extends JFrame implements Observer {
+	private static final long serialVersionUID = 1301853795552357073L;
 	private final Game game;
 
 	public GameFrame(final Game game) {
 		super("Game");
 		this.game = game;
-		initComponents();
 		initFrame();
+		initComponents();
+
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -34,12 +37,13 @@ public class GameFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(Color.white);
 		readyForTermination();
-		setPreferredSize(game.getMapSize());
+		setPreferredSize(game.getMapSize().toDimension());
+		setSize(game.getMapSize().toDimension());
 		setFocusable(true);
+		setLayout(null);
 	}
 
 	private void initComponents() {
-
 		for (GameObject go : game.getGameObjects()) {
 			GameComponent gc = GameComponentFactory.createGameComponent(go);
 			add(gc);
@@ -48,7 +52,8 @@ public class GameFrame extends JFrame {
 		// listen for mouse presses
 		addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				// mousePressed(e.getX(), e.getY());
+				// System.out.println(e.getX() + ":" + e.getY());
+				game.mouseClicked(e);
 			}
 		});
 	}
@@ -64,5 +69,9 @@ public class GameFrame extends JFrame {
 				}
 			}
 		});
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
 	}
 }

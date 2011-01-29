@@ -1,15 +1,20 @@
 package ch.elmermx.model;
 
-import java.awt.Dimension;
+import java.awt.event.MouseEvent;
 import java.util.Observable;
 
 public abstract class GameObject extends Observable {
-	private final Dimension position;
+	protected final GameDimension position, destination;
 
-	public GameObject(Dimension startPosition) {
-		this.position = startPosition;
+	public GameObject(GameDimension startPosition) {
+		this.position = new GameDimension(startPosition);
+		this.destination = new GameDimension(startPosition);
 	}
 
+	public void mouseClicked(MouseEvent e) {
+		this.destination.setSize(new GameDimension(e.getX(), e.getY()));
+	}
+	
 	public abstract void tick();
 
 	public abstract String getName();
@@ -18,7 +23,15 @@ public abstract class GameObject extends Observable {
 		return "-";
 	}
 
-	public Dimension getPosition() {
+	public GameDimension getPosition() {
 		return position;
+	}
+
+	public double getX() {
+		return getPosition().getHeight();
+	}
+
+	public double getY() {
+		return getPosition().getWidth();
 	}
 }
