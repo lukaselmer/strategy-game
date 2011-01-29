@@ -60,10 +60,10 @@ public class GameDimension {
 		x += moveX;
 		y += moveY;
 	}
-	
+
 	@Override
 	public String toString() {
-		return x + " : " + y;
+		return String.format("x: %10.2f, y: %10.2f", x, y);
 	}
 
 }

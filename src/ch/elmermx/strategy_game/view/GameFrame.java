@@ -45,7 +45,7 @@ public class GameFrame extends JFrame implements Observer {
 
 	private void initComponents() {
 		for (GameObject go : game.getGameObjects()) {
-			GameComponent gc = GameComponentFactory.createGameComponent(go);
+			GameComponent gc = GameComponentFactory.createGameComponent(go, game);
 			add(gc);
 		}
 

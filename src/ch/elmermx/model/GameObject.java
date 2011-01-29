@@ -14,7 +14,7 @@ public abstract class GameObject extends Observable {
 	public void mouseClicked(MouseEvent e) {
 		this.destination.setSize(new GameDimension(e.getX(), e.getY()));
 	}
-	
+
 	public abstract void tick();
 
 	public abstract String getName();

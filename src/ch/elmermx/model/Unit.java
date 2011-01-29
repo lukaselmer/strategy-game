@@ -26,7 +26,6 @@ public abstract class Unit extends GameObject {
 			double moveX = -getSpeed() / diffTotal * diffX;
 			double moveY = -getSpeed() / diffTotal * diffY;
 			position.add(moveX, moveY);
-			System.out.println(position);
 		}
 	}
 
